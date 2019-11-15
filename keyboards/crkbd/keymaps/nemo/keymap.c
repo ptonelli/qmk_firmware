@@ -17,14 +17,16 @@ extern uint8_t is_master;
 #define _LOWER 1
 #define _RAISE 2
 #define _ADJUST 3
-#define _GAME 4
+#define _WITCHER 4
+#define _FROSTPUNK 5
 
 enum custom_keycodes {
   AZERTY = SAFE_RANGE,
   LOWER,
   RAISE,
   ADJUST,
-  GAME,
+  WITCHER,
+  FROSTPUNK,
   RAZERTY,
   BACKLIT,
   RGBRST,
@@ -36,8 +38,8 @@ enum macro_keycodes {
   KC_SAMPLEMACRO,
 };
 
-#define KC_LCNT MT(MOD_LCTL, KC_ENT)
-#define KC_WISP MT(MOD_LGUI, KC_SPC)
+#define KC_LCNT MT(MOD_LCTL, KC_SPC)
+#define KC_WINT MT(MOD_LGUI, KC_ENT)
 #define KC_LSPD MT(MOD_LSFT, KC_5)
 #define KC_RSPF MT(MOD_RSFT, KC_MINS)
 #define KC_LBRD MT(MOD_LSFT, KC_4)
@@ -92,19 +94,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
     KC_LSPD,  KC_Z,  KC_X,  KC_C,  KC_V,  KC_B,                   KC_N,  KC_M,KC_COMM,KC_DOT,KC_SLSH,KC_RSPF,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                KC_LALT, LOWER,KC_WISP,   KC_LCNT, RAISE,KC_RALT \
+                                KC_LALT, LOWER,KC_WINT,   KC_LCNT, RAISE,KC_RALT \
                               //`--------------------'  `--------------------'
   ),
 
   [_LOWER] = LAYOUT( \
   //,-----------------------------------------.                ,-----------------------------------------.
-     KC_ESC,KC_PSLS, KC_P7, KC_P8, KC_P9,KC_PMNS,              KC_NO,  KC_NO, KC_NO,KC_MINS,KC_EQL,KC_BSPC,\
+     KC_ESC,KC_PSLS, KC_P7, KC_P8, KC_P9,KC_PMNS,              KC_NO,  KC_NO, KC_NO,KC_LBRC,KC_RBRC,KC_BSPC,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-     KC_TAB,KC_PDOT,KC_P4, KC_P5, KC_P6,KC_PPLS,            RALT(KC_2),RALT(KC_3),RALT(KC_0),KC_LBRC,KC_RBRC,KC_DEL,\
+     KC_TAB,KC_PDOT,KC_P4, KC_P5, KC_P6,KC_PPLS,            RALT(KC_2),RALT(KC_3),RALT(KC_0),KC_QUOT,KC_NUHS,KC_DEL,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
- TD(SHIFT_LB),KC_P0, KC_P1, KC_P2, KC_P3,KC_PAST,           RALT(KC_6),RALT(KC_7),KC_NUBS,KC_QUOT,KC_NUHS,TD(SHIFT_RB),\
+ TD(SHIFT_LB),KC_P0, KC_P1, KC_P2, KC_P3,KC_PAST,           RALT(KC_6),RALT(KC_7),KC_NUBS,KC_MINS,KC_EQL,TD(SHIFT_RB),\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                 KC_EQL, LOWER,KC_WISP,   KC_LCNT, RAISE,KC_RALT \
+                                 KC_EQL, LOWER,KC_WINT,   KC_LCNT, RAISE,KC_RALT \
                               //`--------------------'  `--------------------'
   ),
 
@@ -114,31 +116,42 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
      KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6,                  KC_HOME,KC_LEFT,KC_UP,KC_DOWN,KC_RIGHT,KC_END,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
- TD(SHIFT_LC),KC_F7, KC_F8, KC_F9, KC_F10, KC_F11,              KC_F12,KC_INS,KC_PGUP,KC_PGDN,KC_NO,TD(SHIFT_RC),\
+ TD(SHIFT_LC),KC_F7, KC_F8, KC_F9, KC_F10, KC_F11,              KC_F12,KC_DEL,KC_PGUP,KC_PGDN,KC_INS,TD(SHIFT_RC),\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                KC_LALT, LOWER,KC_WISP,   KC_LCNT, RAISE,KC_RALT \
+                                KC_LALT, LOWER,KC_WINT,   KC_LCNT, RAISE,KC_RALT \
                               //`--------------------'  `--------------------'
   ),
 
   [_ADJUST] = LAYOUT( \
   //,-----------------------------------------.                ,-----------------------------------------.
-    RESET, KC_NLCK,KC_MUTE,KC_VOLD,KC_VOLU,KC_F20,                 GAME, KC_NO,KC_BRID, KC_BRIU,KC_PSCR,KC_PAUS,\
+    RESET, KC_NLCK,KC_MUTE,KC_VOLD,KC_VOLU,KC_F20,             WITCHER,FROSTPUNK,KC_BRID, KC_BRIU,KC_PSCR,KC_PAUS,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
 RGB_TOG,RGB_HUI,LGUI(KC_MUTE),LGUI(KC_VOLD),LGUI(KC_VOLU),KC_NO, KC_NO,KC_NO, LGUI(KC_BRID),LGUI(KC_BRIU), KC_NO, KC_SLCK,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-    RGB_MOD,RGB_HUD,RGB_HUI,RGB_SAD,RGB_SAI,RGBRST,                 KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,\
+    RGB_MOD,RGB_HUD,RGB_HUI,RGB_SAD,RGB_SAI,RGBRST,          RGB_VAD, RGB_VAI, KC_NO, KC_NO, KC_NO, KC_NO,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                KC_LGUI, LOWER,KC_WISP,   KC_LCNT, RAISE,KC_RALT \
+                                KC_LGUI, LOWER,KC_WINT,   KC_LCNT, RAISE,KC_RALT \
                               //`--------------------'  `--------------------'
   ),
 
-  [_GAME] = LAYOUT( \
+  [_WITCHER] = LAYOUT( \
   //,-----------------------------------------.                ,-----------------------------------------.
      KC_ESC,  KC_1,  KC_2,  KC_3,  KC_4,  KC_I,                 KC_2,  KC_Q,  KC_W,  KC_E,  KC_R,  KC_Y,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
      KC_NO, KC_NO, KC_UP, KC_F5, KC_S,   KC_M,                  KC_1,  KC_A,  KC_S,  KC_D,  KC_F,  KC_TAB,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
      KC_NO,KC_LEFT,KC_DOWN,KC_RGHT,KC_V, KC_J,                  KC_X,  KC_C,KC_PGUP,KC_PGDN,KC_T,KC_LSFT,\
+  //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
+                                RAZERTY, KC_NO,KC_ENT,   KC_SPC,KC_LALT,KC_M \
+                              //`--------------------'  `--------------------'
+  ),
+  [_FROSTPUNK] = LAYOUT( \
+  //,-----------------------------------------.                ,-----------------------------------------.
+     KC_ESC,  KC_1,  KC_2,  KC_3,  KC_4,  KC_I,                   KC_R, KC_Q,  KC_W,  KC_E, KC_T,  KC_Y,\
+  //|------+------+------+------+------+------|                |------+----+------+------+-------+------|
+     KC_NO, KC_NO, KC_UP, KC_F5, KC_S,   KC_M,                    KC_F, KC_A,  KC_S,  KC_D, KC_G,  KC_TAB,\
+  //|------+------+------+------+------+------|                |------+----+------+------+-------+------|
+     KC_NO,KC_LEFT,KC_DOWN,KC_RGHT,KC_V, KC_J,                    KC_V, KC_Z,  KC_X,  KC_C, KC_B,KC_LSFT,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
                                 RAZERTY, KC_NO,KC_ENT,   KC_SPC,KC_LALT,KC_M \
                               //`--------------------'  `--------------------'
@@ -258,10 +271,10 @@ void shiftrc_reset (qk_tap_dance_state_t *state, void *user_data) {
 
 // define `ACTION_TAP_DANCE_FN_ADVANCED()` for each tapdance keycode, passing in `finished` and `reset` functions
 qk_tap_dance_action_t tap_dance_actions[] = {
-  [SHIFT_LB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, shiftlb_finished, shiftlb_reset)
- ,[SHIFT_RB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, shiftrb_finished, shiftrb_reset)
- ,[SHIFT_LC] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, shiftlc_finished, shiftlc_reset)
- ,[SHIFT_RC] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, shiftrc_finished, shiftrc_reset)
+  [SHIFT_LB] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, shiftlb_finished, shiftlb_reset, 120)
+ ,[SHIFT_RB] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, shiftrb_finished, shiftrb_reset, 120)
+ ,[SHIFT_LC] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, shiftlc_finished, shiftlc_reset, 120)
+ ,[SHIFT_RC] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, shiftrc_finished, shiftrc_reset, 120)
 };
 
 int RGB_current_mode;
@@ -377,17 +390,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           layer_off(_ADJUST);
         }
         return false;
-    case GAME:
+    case WITCHER:
         if (record->event.pressed) {
-          layer_on(_GAME);
+          layer_on(_WITCHER);
+	}
+        return false;
+    case FROSTPUNK:
+        if (record->event.pressed) {
+          layer_on(_FROSTPUNK);
 	}
         return false;
     case RAZERTY:
         if (record->event.pressed) {
-          layer_off(_GAME);
+          layer_off(_WITCHER);
+          layer_off(_FROSTPUNK);
 	}
         return false;
-
     case RGB_MOD:
       #ifdef RGBLIGHT_ENABLE
         if (record->event.pressed) {
