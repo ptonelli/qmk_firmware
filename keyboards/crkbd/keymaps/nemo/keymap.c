@@ -44,6 +44,9 @@ enum macro_keycodes {
 #define KC_RSPF MT(MOD_RSFT, KC_MINS)
 #define KC_LBRD MT(MOD_LSFT, KC_4)
 #define KC_RBRF MT(MOD_RSFT, KC_EQL)
+#define KC_WITB MT(MOD_RGUI, KC_TAB)
+#define KC_CTEL MT(MOD_RCTL, KC_DEL)
+#define KC_RABS MT(MOD_RALT, KC_NUBS)
 
 // tapdance keycodes
 enum td_keycodes {
@@ -90,35 +93,35 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------.                ,-----------------------------------------.
      KC_ESC,  KC_Q,  KC_W,  KC_E,  KC_R,  KC_T,                   KC_Y,  KC_U,  KC_I,  KC_O,  KC_P,KC_BSPC,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-     KC_TAB,  KC_A,  KC_S,  KC_D,  KC_F,  KC_G,                   KC_H,  KC_J,  KC_K,  KC_L,KC_SCLN,KC_DEL,\
+     KC_WITB,  KC_A,  KC_S,  KC_D,  KC_F,  KC_G,                   KC_H,  KC_J,  KC_K,  KC_L,KC_SCLN,KC_CTEL,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
     KC_LSPD,  KC_Z,  KC_X,  KC_C,  KC_V,  KC_B,                   KC_N,  KC_M,KC_COMM,KC_DOT,KC_SLSH,KC_RSPF,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                KC_LALT, LOWER,KC_WINT,   KC_LCNT, RAISE,KC_RALT \
+                                KC_LALT, LOWER,KC_WINT,   KC_LCNT, RAISE,KC_RABS \
                               //`--------------------'  `--------------------'
   ),
 
   [_LOWER] = LAYOUT( \
   //,-----------------------------------------.                ,-----------------------------------------.
-     KC_ESC,KC_PSLS, KC_P7, KC_P8, KC_P9,KC_PMNS,              KC_NO,  KC_NO, KC_NO,KC_LBRC,KC_RBRC,KC_BSPC,\
+     KC_ESC,KC_PSLS, KC_P7, KC_P8, KC_P9,KC_PMNS,               KC_6,  KC_7,  KC_8,  KC_9,  KC_0,KC_BSPC,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-     KC_TAB,KC_PDOT,KC_P4, KC_P5, KC_P6,KC_PPLS,            RALT(KC_2),RALT(KC_3),RALT(KC_0),KC_QUOT,KC_NUHS,KC_DEL,\
+     KC_WITB,KC_PDOT,KC_P4, KC_P5, KC_P6,KC_PPLS,            RALT(KC_6),RALT(KC_7),RALT(KC_8),RALT(KC_9),RALT(KC_0),KC_CTEL,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
- TD(SHIFT_LB),KC_P0, KC_P1, KC_P2, KC_P3,KC_PAST,           RALT(KC_6),RALT(KC_7),KC_NUBS,KC_MINS,KC_EQL,TD(SHIFT_RB),\
+ TD(SHIFT_LB),KC_P0, KC_P1, KC_P2, KC_P3,KC_PAST,           KC_F6,KC_F7,KC_F8,KC_F9,KC_F10,TD(SHIFT_RB),\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                 KC_EQL, LOWER,KC_WINT,   KC_LCNT, RAISE,KC_RALT \
+                                 KC_EQL, LOWER,KC_WINT,   KC_LCNT, RAISE,KC_RABS \
                               //`--------------------'  `--------------------'
   ),
 
   [_RAISE] = LAYOUT( \
   //,-----------------------------------------.                ,-----------------------------------------.
-     KC_ESC,  KC_1,  KC_2,  KC_3,  KC_4,  KC_5,                   KC_6,  KC_7,  KC_8,  KC_9,  KC_0,KC_BSPC,\
+     KC_ESC,  KC_1,  KC_2,  KC_3,  KC_4,  KC_5,                 KC_HOME,KC_PGUP, KC_UP,KC_PGDN,KC_END,KC_BSPC,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-     KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6,                  KC_HOME,KC_LEFT,KC_UP,KC_DOWN,KC_RIGHT,KC_END,\
+KC_WITB,RALT(KC_1),RALT(KC_2),RALT(KC_3),RALT(KC_4),RALT(KC_5), KC_INS,KC_LEFT,KC_DOWN,KC_RIGHT,KC_RBRC,KC_CTEL,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
- TD(SHIFT_LC),KC_F7, KC_F8, KC_F9, KC_F10, KC_F11,              KC_F12,KC_DEL,KC_PGUP,KC_PGDN,KC_INS,TD(SHIFT_RC),\
+ TD(SHIFT_LC),KC_F1, KC_F2, KC_F3, KC_F4, KC_F5,                KC_F11,KC_F12,KC_QUOT,KC_NUHS,KC_LBRC,TD(SHIFT_RC),\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                KC_LALT, LOWER,KC_WINT,   KC_LCNT, RAISE,KC_RALT \
+                                KC_LALT, LOWER,KC_WINT,   KC_LCNT, RAISE,KC_RABS \
                               //`--------------------'  `--------------------'
   ),
 
@@ -126,11 +129,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------.                ,-----------------------------------------.
     RESET, KC_NLCK,KC_MUTE,KC_VOLD,KC_VOLU,KC_F20,             WITCHER,FROSTPUNK,KC_BRID, KC_BRIU,KC_PSCR,KC_PAUS,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-RGB_TOG,RGB_HUI,LGUI(KC_MUTE),LGUI(KC_VOLD),LGUI(KC_VOLU),KC_NO, KC_NO,KC_NO, LGUI(KC_BRID),LGUI(KC_BRIU), KC_NO, KC_SLCK,\
+RGB_TOG,KC_INS,LGUI(KC_MUTE),LGUI(KC_VOLD),LGUI(KC_VOLU),KC_NO, KC_NO,KC_NO,LGUI(KC_BRID),LGUI(KC_BRIU),KC_NO,KC_SLCK,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-    RGB_MOD,RGB_HUD,RGB_HUI,RGB_SAD,RGB_SAI,RGBRST,          RGB_VAD, RGB_VAI, KC_NO, KC_NO, KC_NO, KC_NO,\
+    RGB_MOD,RGB_HUD,RGB_HUI,RGB_SAD,RGB_SAI,RGBRST,            RGB_VAD,RGB_VAI,KC_NO, KC_NO, KC_NO, KC_NO,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                KC_LGUI, LOWER,KC_WINT,   KC_LCNT, RAISE,KC_RALT \
+                                KC_LGUI, LOWER,KC_WINT,   KC_LCNT, RAISE,KC_RABS \
                               //`--------------------'  `--------------------'
   ),
 
