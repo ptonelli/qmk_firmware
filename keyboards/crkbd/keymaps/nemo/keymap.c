@@ -47,6 +47,7 @@ enum macro_keycodes {
 #define KC_WITB MT(MOD_RGUI, KC_TAB)
 #define KC_CTEL MT(MOD_RCTL, KC_DEL)
 #define KC_RABS MT(MOD_RALT, KC_NUBS)
+#define KC_RF12 MT(MOD_RALT, KC_F12)
 
 // tapdance keycodes
 enum td_keycodes {
@@ -107,7 +108,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
      KC_WITB,KC_PDOT,KC_P4, KC_P5, KC_P6,KC_PPLS,            RALT(KC_6),RALT(KC_7),RALT(KC_8),RALT(KC_9),RALT(KC_0),KC_CTEL,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
- TD(SHIFT_LB),KC_P0, KC_P1, KC_P2, KC_P3,KC_PAST,           KC_F6,KC_F7,KC_F8,KC_F9,KC_F10,TD(SHIFT_RB),\
+ TD(SHIFT_LB),KC_P0, KC_P1, KC_P2, KC_P3,KC_PAST,           KC_NO,KC_LBRC,KC_RBRC,KC_QUOT,KC_NUHS,TD(SHIFT_RB),\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
                                  KC_EQL, LOWER,KC_WINT,   KC_SPC, RAISE,KC_RABS \
                               //`--------------------'  `--------------------'
@@ -119,17 +120,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
 KC_WITB,RALT(KC_1),RALT(KC_2),RALT(KC_3),RALT(KC_4),RALT(KC_5), KC_INS,KC_LEFT,KC_DOWN,KC_RIGHT,KC_RBRC,KC_CTEL,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
- TD(SHIFT_LC),KC_F1, KC_F2, KC_F3, KC_F4, KC_F5,                KC_F11,KC_F12,KC_QUOT,KC_NUHS,KC_LBRC,TD(SHIFT_RC),\
+ TD(SHIFT_LC),KC_F1, KC_F2, KC_F3, KC_F4, KC_F5,                KC_F6,KC_F7,KC_F8,KC_F9,KC_F10,TD(SHIFT_RC),\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                KC_LALT, LOWER,KC_WINT,   KC_SPC, RAISE,KC_RABS \
+                                KC_F11, LOWER,KC_WINT,   KC_SPC, RAISE,KC_RF12 \
                               //`--------------------'  `--------------------'
   ),
 
   [_ADJUST] = LAYOUT( \
   //,-----------------------------------------.                ,-----------------------------------------.
-    RESET, KC_NLCK,KC_MUTE,KC_VOLD,KC_VOLU,KC_F20,             WITCHER,FROSTPUNK,KC_BRID, KC_BRIU,KC_PSCR,KC_PAUS,\
+    RESET, KC_NLCK,KC_MUTE,KC_VOLD,KC_VOLU,KC_F20,             WITCHER,FROSTPUNK,KC_BRID, KC_BRIU,KC_NO,KC_PAUS,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-RGB_TOG,KC_INS,LGUI(KC_MUTE),LGUI(KC_VOLD),LGUI(KC_VOLU),KC_NO, KC_NO,KC_NO,LGUI(KC_BRID),LGUI(KC_BRIU),KC_NO,KC_SLCK,\
+RGB_TOG,KC_PSCR,LGUI(KC_MUTE),LGUI(KC_VOLD),LGUI(KC_VOLU),KC_NO, KC_NO,KC_NO,LGUI(KC_BRID),LGUI(KC_BRIU),KC_NO,KC_SLCK,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
     RGB_MOD,RGB_HUD,RGB_HUI,RGB_SAD,RGB_SAI,RGBRST,            RGB_VAD,RGB_VAI,KC_NO, KC_NO, KC_NO, KC_NO,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
