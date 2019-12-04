@@ -1,9 +1,9 @@
 EXTRAKEY_ENABLE = yes
 TAP_DANCE_ENABLE = yes
 CFLAGS += -flto
-BACKLIGHT_ENABLE = yes      # Enable keyboard backlight functionality
+BACKLIGHT_ENABLE = no     # Enable keyboard backlight functionality
 RGBLIGHT_ENABLE = yes       # Enable WS2812 RGB underlight.
-
+#RGB_MATRIX_ENABLE = WS2812
 
 
 
