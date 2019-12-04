@@ -97,7 +97,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
     KC_LSPD,  KC_Z,  KC_X,  KC_C,  KC_V,  KC_B,                   KC_N,  KC_M,KC_COMM,KC_DOT,KC_SLSH,KC_RSPF,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                KC_LALT, LOWER,KC_WINT,   KC_LCNT, RAISE,KC_RABS \
+                                KC_LALT, LOWER,KC_WINT,   KC_SPC, RAISE,KC_RABS \
                               //`--------------------'  `--------------------'
   ),
 
@@ -109,7 +109,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
  TD(SHIFT_LB),KC_P0, KC_P1, KC_P2, KC_P3,KC_PAST,           KC_F6,KC_F7,KC_F8,KC_F9,KC_F10,TD(SHIFT_RB),\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                 KC_EQL, LOWER,KC_WINT,   KC_LCNT, RAISE,KC_RABS \
+                                 KC_EQL, LOWER,KC_WINT,   KC_SPC, RAISE,KC_RABS \
                               //`--------------------'  `--------------------'
   ),
 
@@ -121,7 +121,7 @@ KC_WITB,RALT(KC_1),RALT(KC_2),RALT(KC_3),RALT(KC_4),RALT(KC_5), KC_INS,KC_LEFT,K
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
  TD(SHIFT_LC),KC_F1, KC_F2, KC_F3, KC_F4, KC_F5,                KC_F11,KC_F12,KC_QUOT,KC_NUHS,KC_LBRC,TD(SHIFT_RC),\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                KC_LALT, LOWER,KC_WINT,   KC_LCNT, RAISE,KC_RABS \
+                                KC_LALT, LOWER,KC_WINT,   KC_SPC, RAISE,KC_RABS \
                               //`--------------------'  `--------------------'
   ),
 
@@ -133,7 +133,7 @@ RGB_TOG,KC_INS,LGUI(KC_MUTE),LGUI(KC_VOLD),LGUI(KC_VOLU),KC_NO, KC_NO,KC_NO,LGUI
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
     RGB_MOD,RGB_HUD,RGB_HUI,RGB_SAD,RGB_SAI,RGBRST,            RGB_VAD,RGB_VAI,KC_NO, KC_NO, KC_NO, KC_NO,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                KC_LGUI, LOWER,KC_WINT,   KC_LCNT, RAISE,KC_RABS \
+                                KC_LGUI, LOWER,KC_WINT,   KC_SPC, RAISE,KC_RABS \
                               //`--------------------'  `--------------------'
   ),
 
