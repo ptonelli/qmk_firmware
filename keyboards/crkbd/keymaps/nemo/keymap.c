@@ -108,9 +108,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
      KC_WITB,KC_PDOT,KC_P4, KC_P5, KC_P6,KC_PPLS,            RALT(KC_6),RALT(KC_7),RALT(KC_8),RALT(KC_9),RALT(KC_0),KC_CTEL,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
- TD(SHIFT_LC),KC_P0, KC_P1, KC_P2, KC_P3,KC_PAST,           KC_NO,KC_LBRC,KC_RBRC,KC_QUOT,KC_NUHS,TD(SHIFT_RC),\
+ TD(SHIFT_LC),KC_EQL, KC_P1, KC_P2, KC_P3,KC_PAST,           KC_NO,KC_LBRC,KC_RBRC,KC_QUOT,KC_NUHS,TD(SHIFT_RC),\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                 KC_EQL, LOWER,KC_WINT,   KC_SPC, RAISE,KC_RABS \
+                                 KC_P0, LOWER,KC_WINT,   KC_SPC, RAISE,KC_RABS \
                               //`--------------------'  `--------------------'
   ),
 
@@ -132,7 +132,7 @@ KC_WITB,RALT(KC_1),RALT(KC_2),RALT(KC_3),RALT(KC_4),RALT(KC_5), KC_INS,KC_LEFT,K
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
 RGB_TOG,KC_PSCR,LGUI(KC_MUTE),LGUI(KC_VOLD),LGUI(KC_VOLU),KC_NO, KC_NO,KC_NO,LGUI(KC_BRID),LGUI(KC_BRIU),KC_NO,KC_SLCK,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-    RGB_MOD,RGB_HUD,RGB_HUI,RGB_SAD,RGB_SAI,RGBRST,            RGB_VAD,RGB_VAI,KC_NO, KC_NO, KC_NO, KC_NO,\
+    RGB_MOD,RGB_HUD,RGB_HUI,RGB_SAD,RGB_SAI,RGBRST,            RGB_VAD,RGB_VAI,RGB_SPD, RGB_SPI, KC_NO, KC_NO,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
                                 KC_LGUI, LOWER,KC_WINT,   KC_SPC, RAISE,KC_RABS \
                               //`--------------------'  `--------------------'
