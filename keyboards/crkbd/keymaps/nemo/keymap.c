@@ -14,19 +14,23 @@ extern uint8_t is_master;
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
 // entirely and just use numbers.
 #define _AZERTY 0
-#define _LOWER 1
-#define _RAISE 2
-#define _ADJUST 3
-#define _WITCHER 4
-#define _FROSTPUNK 5
+#define _ANDROID 1
+#define _LOWER 2
+#define _RAISE 3
+#define _ADJUST 4
+#define _WITCHER 5
+#define _FROSTPUNK 6
+#define _MIDI 7
 
 enum custom_keycodes {
   AZERTY = SAFE_RANGE,
+  ANDROID,
   LOWER,
   RAISE,
   ADJUST,
   WITCHER,
   FROSTPUNK,
+  MIDI,
   RAZERTY,
   BACKLIT,
   RGBRST,
@@ -40,11 +44,13 @@ enum macro_keycodes {
 
 #define KC_LCNT MT(MOD_LCTL, KC_SPC)
 #define KC_WINT MT(MOD_LGUI, KC_ENT)
+#define KC_LANT MT(MOD_LALT, KC_ENT)
 #define KC_LSPD MT(MOD_LSFT, KC_5)
 #define KC_RSPF MT(MOD_RSFT, KC_MINS)
 #define KC_LBRD MT(MOD_LSFT, KC_4)
 #define KC_RBRF MT(MOD_RSFT, KC_EQL)
 #define KC_WITB MT(MOD_RGUI, KC_TAB)
+#define KC_LATB MT(MOD_LALT, KC_TAB)
 #define KC_CTEL MT(MOD_RCTL, KC_DEL)
 #define KC_RABS MT(MOD_RALT, KC_NUBS)
 #define KC_RF12 MT(MOD_RALT, KC_F12)
@@ -102,39 +108,52 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                               //`--------------------'  `--------------------'
   ),
 
+  [_ANDROID] = LAYOUT( \
+  //,-----------------------------------------.                ,-----------------------------------------.
+    _______,_______,_______,_______,_______,_______,           _______,_______,_______,_______,_______,_______,\
+  //|------+------+------+------+------+------|                |------+------+------+------+------+------|
+    KC_LATB,_______,_______,_______,_______,_______,           _______,_______,_______,_______,_______,_______,\
+  //|------+------+------+------+------+------|                |------+------+------+------+------+------|
+    _______,_______,_______,_______,_______,_______,           _______,_______,_______,_______,_______,_______,\
+  //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
+                                RAZERTY,_______,KC_LANT,   _______,_______,_______ \
+                              //`--------------------'  `--------------------'
+  ),
+
+
   [_LOWER] = LAYOUT( \
   //,-----------------------------------------.                ,-----------------------------------------.
-     KC_ESC,S(KC_QUOT), KC_P7, KC_P8, KC_P9,KC_PMNS,               KC_6,  KC_7,  KC_8,  KC_9,  KC_0,KC_BSPC,\
+    _______,S(KC_QUOT), KC_P7, KC_P8, KC_P9,KC_PMNS,               KC_6,  KC_7,  KC_8,  KC_9,  KC_0,_______,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-     KC_WITB,KC_PDOT,KC_P4, KC_P5, KC_P6,KC_PPLS,            RALT(KC_6),RALT(KC_7),RALT(KC_8),RALT(KC_9),RALT(KC_0),KC_CTEL,\
+    _______,KC_PDOT,KC_P4, KC_P5, KC_P6,KC_PPLS,            RALT(KC_6),RALT(KC_7),RALT(KC_8),RALT(KC_9),RALT(KC_0),_______,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
  TD(SHIFT_LC),KC_P0, KC_P1, KC_P2, KC_P3,KC_PAST,           KC_NO,KC_LBRC,KC_RBRC,KC_QUOT,KC_NUHS,TD(SHIFT_RC),\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                 KC_EQL, LOWER,KC_WINT,   KC_SPC, RAISE,KC_RABS \
+                                 KC_EQL, LOWER,_______,  _______, RAISE,KC_RABS \
                               //`--------------------'  `--------------------'
   ),
 
   [_RAISE] = LAYOUT( \
   //,-----------------------------------------.                ,-----------------------------------------.
-     KC_ESC,  KC_1,  KC_2,  KC_3,  KC_4,  KC_5,                 KC_HOME,KC_PGUP, KC_UP,KC_PGDN,KC_END,KC_BSPC,\
+     _______,  KC_1,  KC_2,  KC_3,  KC_4,  KC_5,                 KC_HOME,KC_PGUP, KC_UP,KC_PGDN,KC_END,_______,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-KC_WITB,RALT(KC_1),RALT(KC_2),RALT(KC_3),RALT(KC_4),S(KC_NUBS), KC_INS,KC_LEFT,KC_DOWN,KC_RIGHT,KC_RBRC,KC_CTEL,\
+_______,RALT(KC_1),RALT(KC_2),RALT(KC_3),RALT(KC_4),S(KC_NUBS), KC_INS,KC_LEFT,KC_DOWN,KC_RIGHT,KC_RBRC,_______,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
  TD(SHIFT_LB),KC_F1, KC_F2, KC_F3, KC_F4, KC_F5,                KC_F6,KC_F7,KC_F8,KC_F9,KC_F10,TD(SHIFT_RB),\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                KC_F11, LOWER,KC_WINT,   KC_SPC, RAISE,KC_RF12 \
+                                KC_F11, LOWER,_______,   _______, RAISE,KC_RF12 \
                               //`--------------------'  `--------------------'
   ),
 
   [_ADJUST] = LAYOUT( \
   //,-----------------------------------------.                ,-----------------------------------------.
-    RESET, KC_NLCK,KC_MUTE,KC_VOLD,KC_VOLU,KC_F20,             WITCHER,FROSTPUNK,KC_BRID, KC_BRIU,KC_NO,KC_PAUS,\
+    C(A(KC_DEL)), KC_NLCK,KC_MUTE,KC_VOLD,KC_VOLU,KC_F20,     WITCHER,FROSTPUNK,KC_BRID, KC_BRIU,KC_SLCK,KC_PAUS,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-RGB_TOG,KC_PSCR,LGUI(KC_MUTE),LGUI(KC_VOLD),LGUI(KC_VOLU),KC_NO, KC_NO,KC_NO,LGUI(KC_BRID),LGUI(KC_BRIU),KC_NO,KC_SLCK,\
+RGB_TOG,KC_PSCR,LGUI(KC_MUTE),LGUI(KC_VOLD),LGUI(KC_VOLU),KC_NO,MIDI,ANDROID,LGUI(KC_BRID),LGUI(KC_BRIU),KC_NO,KC_NO,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-    RGB_MOD,RGB_HUD,RGB_HUI,RGB_SAD,RGB_SAI,RGBRST,            RGB_VAD,RGB_VAI,RGB_SPD, RGB_SPI, KC_NO, KC_NO,\
+    RGB_MOD,RGB_HUD,RGB_HUI,RGB_SAD,RGB_SAI,RGBRST,            RGB_VAD,RGB_VAI,RGB_SPD, RGB_SPI,KC_NO,KC_NO,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                KC_LGUI, LOWER,KC_WINT,   KC_SPC, RAISE,KC_RABS \
+                                KC_LGUI, LOWER,_______,  _______, RAISE,KC_RABS \
                               //`--------------------'  `--------------------'
   ),
 
@@ -146,7 +165,7 @@ RGB_TOG,KC_PSCR,LGUI(KC_MUTE),LGUI(KC_VOLD),LGUI(KC_VOLU),KC_NO, KC_NO,KC_NO,LGU
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
      KC_NO,KC_LEFT,KC_DOWN,KC_RGHT,KC_V, KC_J,                  KC_X,  KC_C,KC_PGUP,KC_PGDN,KC_T,KC_LSFT,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                RAZERTY, KC_NO,KC_ENT,   KC_SPC,KC_LALT,KC_M \
+                                RAZERTY, LOWER,KC_ENT,   KC_SPC,KC_LALT,KC_M \
                               //`--------------------'  `--------------------'
   ),
   [_FROSTPUNK] = LAYOUT( \
@@ -157,9 +176,21 @@ RGB_TOG,KC_PSCR,LGUI(KC_MUTE),LGUI(KC_VOLD),LGUI(KC_VOLU),KC_NO, KC_NO,KC_NO,LGU
   //|------+------+------+------+------+------|                |------+----+------+------+-------+------|
      KC_NO,KC_LEFT,KC_DOWN,KC_RGHT,KC_V, KC_J,                    KC_V, KC_Z,  KC_X,  KC_C, KC_B,KC_LSFT,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                RAZERTY, KC_NO,KC_ENT,   KC_SPC,KC_LALT,KC_M \
+                                RAZERTY, LOWER,KC_ENT,   KC_SPC,RAISE,KC_M \
                               //`--------------------'  `--------------------'
-  )
+  ),
+  [_MIDI] = LAYOUT( \
+  //,-----------------------------------------.                ,-----------------------------------------.
+     MI_CHU, KC_NO, MI_Cs, MI_Ds, KC_NO, MI_Fs,                  MI_Gs, MI_As,KC_NO,MI_Cs_1,MI_Ds_1,KC_NO,\
+  //|------+------+------+------+------+------|                |------+------+------+------+------+------|
+     MI_MOD,  MI_C,  MI_D,  MI_E,  MI_F,  MI_G,                   MI_A,  MI_B,MI_C_1,MI_D_1,MI_E_1,MI_F_1,\
+  //|------+------+------+------+------+------|                |------+------+------+------+------+------|
+    MI_SUS,MI_OCTD,MI_OCTU,MI_MODSD,MI_MODSU,KC_NO,            KC_NO,KC_NO,MI_TRNSD,MI_TRNSU,MI_TRNS_0,MI_SUS,\
+  //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
+                                RAZERTY, MI_OCTD,MI_ALLOFF,   MI_SUS, MI_OCTU,KC_NO \
+                              //`--------------------'  `--------------------'
+  ),
+
 };
 
 // determine the tapdance state to return
@@ -387,6 +418,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
       }
       return false;
+    case ANDROID:
+        if (record->event.pressed) {
+          layer_on(_ANDROID);
+	}
+        return false;
+
     case ADJUST:
         if (record->event.pressed) {
           layer_on(_ADJUST);
@@ -404,10 +441,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           layer_on(_FROSTPUNK);
 	}
         return false;
+    case MIDI:
+        if (record->event.pressed) {
+          layer_on(_MIDI);
+	}
+        return false;
     case RAZERTY:
         if (record->event.pressed) {
+          layer_off(_ANDROID);
           layer_off(_WITCHER);
           layer_off(_FROSTPUNK);
+          layer_off(_MIDI);
 	}
         return false;
       #ifdef RGBLIGHT_ENABLE
