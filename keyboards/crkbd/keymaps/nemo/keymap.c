@@ -20,7 +20,9 @@ extern uint8_t is_master;
 #define _ADJUST 4
 #define _WITCHER 5
 #define _FROSTPUNK 6
-#define _MIDI 7
+#define _GAME 7
+#define _GAME_RAISE 8
+#define _MIDI 9
 
 enum custom_keycodes {
   AZERTY = SAFE_RANGE,
@@ -30,6 +32,8 @@ enum custom_keycodes {
   ADJUST,
   WITCHER,
   FROSTPUNK,
+  GAME,
+  GRAISE,
   MIDI,
   RAZERTY,
   BACKLIT,
@@ -114,7 +118,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
     KC_LATB,_______,_______,_______,_______,_______,           _______,_______,_______,_______,_______,_______,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-    _______,_______,_______,_______,_______,_______,           _______,_______,_______,_______,_______,_______,\
+    KC_LSFT,_______,_______,_______,_______,_______,           _______,_______,_______,_______,_______,KC_RSFT,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
                                 RAZERTY,_______,KC_LANT,   _______,_______,_______ \
                               //`--------------------'  `--------------------'
@@ -149,7 +153,7 @@ _______,RALT(KC_1),RALT(KC_2),RALT(KC_3),RALT(KC_4),S(KC_NUBS), KC_INS,KC_LEFT,K
   //,-----------------------------------------.                ,-----------------------------------------.
     C(A(KC_DEL)), KC_NLCK,KC_MUTE,KC_VOLD,KC_VOLU,KC_F20,     WITCHER,FROSTPUNK,KC_BRID, KC_BRIU,KC_SLCK,KC_PAUS,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-RGB_TOG,KC_PSCR,LGUI(KC_MUTE),LGUI(KC_VOLD),LGUI(KC_VOLU),KC_NO,MIDI,ANDROID,LGUI(KC_BRID),LGUI(KC_BRIU),KC_NO,KC_NO,\
+RGB_TOG,KC_PSCR,LGUI(KC_MUTE),LGUI(KC_VOLD),LGUI(KC_VOLU),KC_NO,MIDI,ANDROID,LGUI(KC_BRID),LGUI(KC_BRIU),GAME,KC_NO,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
     RGB_MOD,RGB_HUD,RGB_HUI,RGB_SAD,RGB_SAI,RGBRST,            RGB_VAD,RGB_VAI,RGB_SPD, RGB_SPI,KC_NO,KC_NO,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
@@ -161,7 +165,7 @@ RGB_TOG,KC_PSCR,LGUI(KC_MUTE),LGUI(KC_VOLD),LGUI(KC_VOLU),KC_NO,MIDI,ANDROID,LGU
   //,-----------------------------------------.                ,-----------------------------------------.
      KC_ESC,  KC_1,  KC_2,  KC_3,  KC_4,  KC_I,                 KC_2,  KC_Q,  KC_W,  KC_E,  KC_R,  KC_Y,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-     KC_NO, KC_NO, KC_UP, KC_F5, KC_S,   KC_SCLN,               KC_1,  KC_A,  KC_S,  KC_D,  KC_F,  KC_TAB,\
+      KC_NO, KC_NO, KC_UP, KC_F5, KC_S,KC_SCLN,                   KC_1, KC_A,   KC_S,  KC_D,  KC_F,KC_TAB,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
      KC_NO,KC_LEFT,KC_DOWN,KC_RGHT,KC_V, KC_J,                  KC_X,  KC_C,KC_PGUP,KC_PGDN,KC_T,KC_LSFT,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
@@ -179,6 +183,30 @@ RGB_TOG,KC_PSCR,LGUI(KC_MUTE),LGUI(KC_VOLD),LGUI(KC_VOLU),KC_NO,MIDI,ANDROID,LGU
                                 RAZERTY, LOWER,KC_ENT,   KC_SPC,RAISE,KC_M \
                               //`--------------------'  `--------------------'
   ),
+  [_GAME] = LAYOUT( \
+  //,-----------------------------------------.                ,-----------------------------------------.
+    _______,_______,_______,_______,_______,_______,           _______,_______,KC_UP,_______,_______,KC_INS,\
+  //|------+------+------+------+------+------|                |------+------+------+------+------+------|
+    KC_TAB,_______,_______,_______,_______,_______,           _______,KC_LEFT,KC_DOWN,KC_RIGHT,KC_L,KC_DEL,\
+  //|------+------+------+------+------+------|                |------+------+------+------+------+------|
+    KC_LSFT,_______,_______,_______,_______,_______,           KC_B,KC_N,_______,_______,_______,KC_RSFT,\
+  //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
+                                KC_LALT,KC_RALT,KC_ENT,   _______,KC_RCTL,GRAISE \
+                              //`--------------------'  `--------------------'
+  ),
+  [_GAME_RAISE] = LAYOUT( \
+  //,-----------------------------------------.                ,-----------------------------------------.
+    RAZERTY,  KC_1,  KC_2,  KC_3,  KC_4,  KC_5,                   KC_1,  KC_2,  KC_3,  KC_4,  KC_5,KC_INS,\
+  //|------+------+------+------+------+------|                |------+------+------+------+------+------|
+    _______,  KC_6,  KC_7,  KC_8,  KC_9,  KC_0,                   KC_6,  KC_7,  KC_8,  KC_9,  KC_0,KC_DEL,\
+  //|------+------+------+------+------+------|                |------+------+------+------+------+------|
+    _______, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5,                  KC_F6, KC_F7, KC_F8, KC_F9,KC_F10,KC_RSFT,\
+  //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
+                                _______,_______,_______,   _______,KC_RCTL,_______ \
+                              //`--------------------'  `--------------------'
+  ),
+
+
   [_MIDI] = LAYOUT( \
   //,-----------------------------------------.                ,-----------------------------------------.
      MI_CHU, KC_NO, MI_Cs, MI_Ds, KC_NO, MI_Fs,                  MI_Gs, MI_As,KC_NO,MI_Cs_1,MI_Ds_1,KC_NO,\
@@ -441,6 +469,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           layer_on(_FROSTPUNK);
 	}
         return false;
+    case GAME:
+        if (record->event.pressed) {
+          layer_on(_GAME);
+	}
+        return false;
+    case GRAISE:
+      if (record->event.pressed) {
+        layer_on(_GAME_RAISE);
+      } else {
+        layer_off(_GAME_RAISE);
+      }
+      return false;
     case MIDI:
         if (record->event.pressed) {
           layer_on(_MIDI);
@@ -451,6 +491,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           layer_off(_ANDROID);
           layer_off(_WITCHER);
           layer_off(_FROSTPUNK);
+          layer_off(_GAME);
           layer_off(_MIDI);
 	}
         return false;
