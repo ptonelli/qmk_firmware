@@ -19,10 +19,9 @@ extern uint8_t is_master;
 #define _RAISE 3
 #define _ADJUST 4
 #define _WITCHER 5
-#define _FROSTPUNK 6
-#define _GAME 7
-#define _GAME_RAISE 8
-#define _MIDI 9
+#define _GAME 6
+#define _GAME_RAISE 7
+#define _MIDI 8
 
 enum custom_keycodes {
   AZERTY = SAFE_RANGE,
@@ -31,7 +30,6 @@ enum custom_keycodes {
   RAISE,
   ADJUST,
   WITCHER,
-  FROSTPUNK,
   GAME,
   GRAISE,
   MIDI,
@@ -153,9 +151,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_RAISE] = LAYOUT( \
   //,-----------------------------------------.                ,-----------------------------------------.
-  _______,KC_1,  KC_2,  KC_3,  KC_4,  KC_5,                    KC_HOME,KC_PGUP, KC_UP,KC_PGDN,KC_END,_______,\
+  _______,KC_1,  KC_2,  KC_3,  KC_4,  KC_5,                    _______,KC_HOME, KC_UP,KC_END,KC_PGUP,_______,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-  _______,_______, _______, _______, _______,_______,          KC_INS,KC_LEFT,KC_DOWN,KC_RIGHT,_______,_______,\
+  _______,_______, _______, _______, _______,_______,          KC_INS,KC_LEFT,KC_DOWN,KC_RIGHT,KC_PGDN,_______,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
  TD(SHIFT_LB),KC_F1, KC_F2, KC_F3, KC_F4, KC_F5,                KC_F6,KC_F7,KC_F8,KC_F9,KC_F10,TD(SHIFT_RB),\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
@@ -165,9 +163,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_ADJUST] = LAYOUT( \
   //,-----------------------------------------.                ,-----------------------------------------.
-    C(A(KC_DEL)), KC_NLCK,KC_MUTE,KC_VOLD,KC_VOLU,KC_F20,      GAME,FROSTPUNK,MIDI,KC_MINS,KC_EQL,_______,\
+    C(A(KC_DEL)), KC_NLCK,KC_MUTE,KC_VOLD,KC_VOLU,KC_F20,      GAME,ANDROID,MIDI,KC_MINS,KC_EQL,_______,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-RGB_TOG,KC_PSCR,G(S(KC_S)),KC_BRID,KC_BRIU,_______,            WITCHER,ANDROID,_______,KC_LBRC,KC_RBRC,_______,\
+RGB_TOG,KC_PSCR,G(S(KC_S)),KC_BRID,KC_BRIU,_______,            WITCHER,_______,_______,KC_LBRC,KC_RBRC,_______,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
  TD(SHIFT_LA),RGB_MOD,RGB_HUI,RGB_SAD,RGB_SAI,RGBRST,            RGB_VAD,RGB_VAI,RGB_SPD,KC_QUOT,KC_NUHS,TD(SHIFT_RA),\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
@@ -186,17 +184,6 @@ RGB_TOG,KC_PSCR,G(S(KC_S)),KC_BRID,KC_BRIU,_______,            WITCHER,ANDROID,_
                                 RAZERTY,_______,KC_ENT,   KC_SPC,KC_LALT,KC_M \
                               //`--------------------'  `--------------------'
   ),
-  [_FROSTPUNK] = LAYOUT( \
-  //,-----------------------------------------.                ,-----------------------------------------.
-     KC_ESC,  KC_1,  KC_2,  KC_3,  KC_4,  KC_I,                   KC_R, KC_Q,  KC_W,  KC_E, KC_T,  KC_Y,\
-  //|------+------+------+------+------+------|                |------+----+------+------+-------+------|
-     KC_NO, KC_NO, KC_UP, KC_F5, KC_S,   KC_M,                    KC_F, KC_A,  KC_S,  KC_D, KC_G,  KC_TAB,\
-  //|------+------+------+------+------+------|                |------+----+------+------+-------+------|
-     KC_NO,KC_LEFT,KC_DOWN,KC_RGHT,KC_V, KC_J,                    KC_V, KC_Z,  KC_X,  KC_C, KC_B,KC_LSFT,\
-  //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                RAZERTY,_______,KC_ENT,   KC_SPC,RAISE,KC_M \
-                              //`--------------------'  `--------------------'
-  ),
   [_GAME] = LAYOUT( \
   //,-----------------------------------------.                ,-----------------------------------------.
     _______,_______,_______,_______,_______,_______,           _______,_______,KC_UP,_______,_______,KC_INS,\
@@ -205,12 +192,12 @@ RGB_TOG,KC_PSCR,G(S(KC_S)),KC_BRID,KC_BRIU,_______,            WITCHER,ANDROID,_
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
     KC_LSFT,_______,_______,_______,_______,_______,           KC_B,KC_N,_______,_______,_______,KC_RSFT,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                KC_LALT,KC_RALT,KC_ENT,   _______,KC_RCTL,GRAISE \
+                                KC_LALT,KC_RCTL,KC_ENT,   _______,GRAISE,KC_RALT \
                               //`--------------------'  `--------------------'
   ),
   [_GAME_RAISE] = LAYOUT( \
   //,-----------------------------------------.                ,-----------------------------------------.
-    RAZERTY,  KC_1,  KC_2,  KC_3,  KC_4,  KC_5,                   KC_1,  KC_2,  KC_I,  KC_4,  KC_5,KC_INS,\
+    RAZERTY,  KC_1,  KC_2,  KC_3,  KC_4,  KC_5,                   KC_1,  KC_2,  KC_3,  KC_4,  KC_5,KC_INS,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
     _______,  KC_6,  KC_7,  KC_8,  KC_9,  KC_0,                   KC_6,  KC_J,  KC_K,  KC_L,  KC_0,KC_BSPC,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
@@ -529,12 +516,12 @@ void lowertd_reset (qk_tap_dance_state_t *state, void *user_data) {
 
 // define `ACTION_TAP_DANCE_FN_ADVANCED()` for each tapdance keycode, passing in `finished` and `reset` functions
 qk_tap_dance_action_t tap_dance_actions[] = {
-  [SHIFT_LB] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, shiftlb_finished, shiftlb_reset, 150)
- ,[SHIFT_RB] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, shiftrb_finished, shiftrb_reset, 150)
- ,[SHIFT_LC] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, shiftlc_finished, shiftlc_reset, 150)
- ,[SHIFT_RC] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, shiftrc_finished, shiftrc_reset, 150)
- ,[SHIFT_LA] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, shiftla_finished, shiftla_reset, 150)
- ,[SHIFT_RA] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, shiftra_finished, shiftra_reset, 150)
+  [SHIFT_LB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, shiftlb_finished, shiftlb_reset)
+ ,[SHIFT_RB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, shiftrb_finished, shiftrb_reset)
+ ,[SHIFT_LC] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, shiftlc_finished, shiftlc_reset)
+ ,[SHIFT_RC] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, shiftrc_finished, shiftrc_reset)
+ ,[SHIFT_LA] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, shiftla_finished, shiftla_reset)
+ ,[SHIFT_RA] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, shiftra_finished, shiftra_reset)
  ,[LOWER_TD] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, lowertd_finished, lowertd_reset)
 };
 
@@ -588,11 +575,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           layer_on(_WITCHER);
 	}
         return false;
-    case FROSTPUNK:
-        if (record->event.pressed) {
-          layer_on(_FROSTPUNK);
-	}
-        return false;
     case GAME:
         if (record->event.pressed) {
           layer_on(_GAME);
@@ -614,7 +596,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         if (record->event.pressed) {
           layer_off(_ANDROID);
           layer_off(_WITCHER);
-          layer_off(_FROSTPUNK);
           layer_off(_GAME);
           layer_off(_MIDI);
 	}
