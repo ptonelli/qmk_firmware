@@ -16,12 +16,13 @@ extern uint8_t is_master;
 #define _AZERTY 0
 #define _ANDROID 1
 #define _LOWER 2
-#define _RAISE 3
-#define _ADJUST 4
-#define _WITCHER 5
-#define _GAME 6
-#define _GAME_RAISE 7
-#define _MIDI 8
+#define _LOWER2 3
+#define _RAISE 4
+#define _ADJUST 5
+#define _WITCHER 6
+#define _GAME 7
+#define _GAME_RAISE 8
+#define _MIDI 9
 
 enum custom_keycodes {
   AZERTY = SAFE_RANGE,
@@ -42,17 +43,15 @@ enum macro_keycodes {
   KC_SAMPLEMACRO,
 };
 
-#define KC_LCNT MT(MOD_LCTL, KC_SPC)
+#define KC_RCNT MT(MOD_RCTL, KC_SPC)
 #define KC_WINT MT(MOD_LGUI, KC_ENT)
 #define KC_LANT MT(MOD_LALT, KC_ENT)
 #define SFT_LP MT(MOD_LSFT, KC_5)
 #define SFT_RP MT(MOD_RSFT, KC_MINS)
 #define KC_LBRD MT(MOD_LSFT, KC_4)
-#define KC_RBRF MT(MOD_RSFT, KC_EQL)
 #define KC_WITB MT(MOD_RGUI, KC_TAB)
 #define KC_LATB MT(MOD_LALT, KC_TAB)
 #define KC_CTEL MT(MOD_RCTL, KC_DEL)
-#define KC_RF12 MT(MOD_RALT, KC_F12)
 
 // ugly hack to get MT to type [], see process_record_user
 #define SFT_LB MT(MOD_LSFT, KC_F24)
@@ -117,11 +116,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------.                ,-----------------------------------------.
     _______,KC_1,  KC_2,  KC_3,  KC_4,  KC_5,                  KC_6,  KC_7,  KC_8,  KC_9,  KC_0,_______,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-    _______,RSFT(KC_1),RSFT(KC_2),RSFT(KC_3),RSFT(KC_4),RSFT(KC_5),RSFT(KC_6),RSFT(KC_7),RSFT(KC_8),RSFT(KC_9),RSFT(KC_0) ,_______,\
+    KC_TAB,S(KC_1),S(KC_2),S(KC_3),S(KC_4),S(KC_5),            S(KC_6),S(KC_7),S(KC_8),S(KC_9),S(KC_0) ,_______,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
  SFT_LCB,RALT(KC_1),RALT(KC_2),RALT(KC_3),RALT(KC_4),RALT(KC_5),RALT(KC_6),RALT(KC_7),RALT(KC_8),RALT(KC_9),RALT(KC_0),SFT_RCB,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                               _______,_______,_______, _______,_______,_______ \
+                               _______,_______,_______, KC_RCNT,_______,_______ \
+                              //`--------------------'  `--------------------'
+  ),
+  // heavy i3 use for the next layer (switch desktop and move windows around)
+  [_LOWER2] = LAYOUT( \
+  //,-----------------------------------------.                ,-----------------------------------------.
+    _______,G(KC_1),G(KC_2),G(KC_3),G(KC_4),G(KC_5),           G(KC_6),G(KC_7),G(KC_8),G(KC_9),G(KC_0),_______,\
+  //|------+------+------+------+------+------|                |------+------+------+------+------+------|
+    KC_TAB,G(S(KC_1)),G(S(KC_2)),G(S(KC_3)),G(S(KC_4)),G(S(KC_5)),G(S(KC_6)),G(S(KC_7)),G(S(KC_8)),G(S(KC_9)),G(S(KC_0)),KC_DEL,\
+  //|------+------+------+------+------+------|                |------+------+------+------+------+------|
+     KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6,                  KC_F7, KC_F8, KC_F9, KC_F10,KC_F11,KC_F12,\
+  //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
+                               _______,_______,_______, KC_RCNT,_______,_______ \
                               //`--------------------'  `--------------------'
   ),
 
@@ -129,24 +140,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------.                ,-----------------------------------------.
   _______,KC_1,  KC_2,  KC_3,  KC_4,  KC_5,                    KC_PGUP,KC_HOME, KC_UP,KC_END,KC_MINS,KC_EQL,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-  _______,RSFT(KC_1),RSFT(KC_2),RSFT(KC_3),RSFT(KC_4),RSFT(KC_5),KC_PGDN,KC_LEFT,KC_DOWN,KC_RIGHT,KC_LBRC,KC_RBRC,\
+  KC_TAB,RSFT(KC_1),RSFT(KC_2),RSFT(KC_3),RSFT(KC_4),RSFT(KC_5),KC_PGDN,KC_LEFT,KC_DOWN,KC_RIGHT,KC_LBRC,KC_RBRC,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
- SFT_LB,RALT(KC_1),RALT(KC_2),RALT(KC_3),RALT(KC_4),RALT(KC_5),RALT(KC_6),RALT(KC_7),RALT(KC_8),KC_QUOT,KC_NUHS,SFT_RB,\
+ SFT_LB,RALT(KC_1),RALT(KC_2),RALT(KC_3),RALT(KC_4),RALT(KC_5), KC_INS,KC_PSCR,RALT(KC_8),KC_QUOT,KC_NUHS,SFT_RB,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                KC_F11,_______,_______,   _______, RAISE,KC_RF12 \
+                                _______,_______,_______, KC_RCNT,_______,_______ \
                               //`--------------------'  `--------------------'
   ),
 
 
   [_ADJUST] = LAYOUT( \
   //,-----------------------------------------.                ,-----------------------------------------.
-    C(A(KC_DEL)), KC_NLCK,KC_MUTE,KC_VOLD,KC_VOLU,KC_F20,      GAME,ANDROID,MIDI,KC_MINS,KC_EQL,_______,\
+ C(A(KC_DEL)),KC_NLCK,KC_MUTE,KC_VOLD,KC_VOLU,KC_F20,          GAME,WITCHER,MIDI,KC_MINS,KC_EQL,_______,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-RGB_TOG,KC_PSCR,G(S(KC_S)),KC_BRID,KC_BRIU,_______,            WITCHER,_______,_______,KC_LBRC,KC_RBRC,_______,\
+RGB_TOG,KC_CAPS,G(S(KC_S)),KC_BRID,KC_BRIU,_______,            _______,_______,_______,KC_LBRC,KC_RBRC,_______,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
  SFT_INF,RGB_MOD,RGB_HUI,RGB_SAD,RGB_SAI,RGBRST,            RGB_VAD,RGB_VAI,RGB_SPD,KC_QUOT,KC_NUHS,SFT_SUP,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                KC_LALT,_______,_______,_______,_______,KC_RALT \
+                                KC_LALT,_______,_______,_______,_______,_______ \
                               //`--------------------'  `--------------------'
   ),
 
@@ -292,9 +303,8 @@ void lowertd_finished (qk_tap_dance_state_t *state, void *user_data) {
         update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
       break;
     case DOUBLE_HOLD:
-        layer_on(_LOWER);
+        layer_on(_LOWER2);
         update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
-        register_mods(MOD_BIT(KC_LGUI));
       break;
     default:
       break;
@@ -304,6 +314,7 @@ void lowertd_finished (qk_tap_dance_state_t *state, void *user_data) {
 void lowertd_reset (qk_tap_dance_state_t *state, void *user_data) {
         unregister_mods(MOD_BIT(KC_LGUI));
         layer_off(_LOWER);
+        layer_off(_LOWER2);
         layer_off(_ADJUST);
 }
 
@@ -328,6 +339,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         persistent_default_layer_set(1UL<<_AZERTY);
       }
       return false;
+      break;
     case SFT_LB:
       if (record->tap.count > 0) {
         if (record->event.pressed) {
@@ -339,6 +351,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
       }
+      break;
     case SFT_RB:
       if (record->tap.count > 0) {
         if (record->event.pressed) {
@@ -350,6 +363,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
       }
+      break;
     case SFT_LCB:
       if (record->tap.count > 0) {
         if (record->event.pressed) {
@@ -361,6 +375,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
       }
+      break;
     case SFT_RCB:
       if (record->tap.count > 0) {
         if (record->event.pressed) {
@@ -372,6 +387,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
       }
+      break;
     case SFT_SUP:
       if (record->tap.count > 0) {
         if (record->event.pressed) {
@@ -383,6 +399,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
       }
+	break;
 
     case LOWER:
       if (record->event.pressed) {
@@ -393,6 +410,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
       }
       return false;
+      break;
     case RAISE:
       if (record->event.pressed) {
         layer_on(_RAISE);
@@ -402,12 +420,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
       }
       return false;
+      break;
     case ANDROID:
         if (record->event.pressed) {
           layer_on(_ANDROID);
 	}
         return false;
-
+	break;
     case ADJUST:
         if (record->event.pressed) {
           layer_on(_ADJUST);
@@ -415,16 +434,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           layer_off(_ADJUST);
         }
         return false;
+	break;
     case WITCHER:
         if (record->event.pressed) {
           layer_on(_WITCHER);
 	}
         return false;
+	break;
     case GAME:
         if (record->event.pressed) {
           layer_on(_GAME);
 	}
         return false;
+	break;
     case GRAISE:
       if (record->event.pressed) {
         layer_on(_GAME_RAISE);
@@ -432,11 +454,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_off(_GAME_RAISE);
       }
       return false;
+      break;
     case MIDI:
         if (record->event.pressed) {
           layer_on(_MIDI);
 	}
         return false;
+	break;
     case RAZERTY:
         if (record->event.pressed) {
           layer_off(_ANDROID);
@@ -445,6 +469,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           layer_off(_MIDI);
 	}
         return false;
+	break;
       #ifdef RGBLIGHT_ENABLE
     case RGB_MOD:
         if (record->event.pressed) {
@@ -453,6 +478,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           RGB_current_mode = rgblight_config.mode;
         }
       return false;
+      break;
     case RGBRST:
         if (record->event.pressed) {
           eeconfig_update_rgblight_default();
