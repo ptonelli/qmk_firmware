@@ -45,8 +45,8 @@ enum macro_keycodes {
 #define KC_LCNT MT(MOD_LCTL, KC_SPC)
 #define KC_WINT MT(MOD_LGUI, KC_ENT)
 #define KC_LANT MT(MOD_LALT, KC_ENT)
-#define KC_LSPD MT(MOD_LSFT, KC_5)
-#define KC_RSPF MT(MOD_RSFT, KC_MINS)
+#define SFT_LP MT(MOD_LSFT, KC_5)
+#define SFT_RP MT(MOD_RSFT, KC_MINS)
 #define KC_LBRD MT(MOD_LSFT, KC_4)
 #define KC_RBRF MT(MOD_RSFT, KC_EQL)
 #define KC_WITB MT(MOD_RGUI, KC_TAB)
@@ -54,15 +54,21 @@ enum macro_keycodes {
 #define KC_CTEL MT(MOD_RCTL, KC_DEL)
 #define KC_RF12 MT(MOD_RALT, KC_F12)
 
+// ugly hack to get MT to type [], see process_record_user
+#define SFT_LB MT(MOD_LSFT, KC_F24)
+#define SFT_RB MT(MOD_RSFT, KC_F24)
+
+// ugly hack to get MT to type {}, see process_record_user
+#define SFT_LCB MT(MOD_LSFT, KC_OUT)
+#define SFT_RCB MT(MOD_RSFT, KC_OUT)
+
+#define SFT_INF MT(MOD_LSFT, KC_NUBS)
+// ugly hack to get MT to type >, see process_record_user
+#define SFT_SUP MT(MOD_RSFT, KC_OPER)
+
 // tapdance keycodes
 enum td_keycodes {
-  SHIFT_LB // Our example key: `SHIFT` when held, `[` when tapped. Add additional keycodes for each tapdance.
- ,SHIFT_RB // Our example key: `SHIFT` when held, `]` when tapped. Add additional keycodes for each tapdance.
- ,SHIFT_LC // Our example key: `SHIFT` when held, `{` when tapped. Add additional keycodes for each tapdance.
- ,SHIFT_RC // Our example key: `SHIFT` when held, `}` when tapped. Add additional keycodes for each tapdance.
- ,SHIFT_LA // Our example key: `SHIFT` when held, `<` when tapped. Add additional keycodes for each tapdance.
- ,SHIFT_RA // Our example key: `SHIFT` when held, `>` when tapped. Add additional keycodes for each tapdance.
- ,LOWER_TD // Our example key: `LOWER` when held, LGUI + `LOWER` when double held.
+ LOWER_TD // Our example key: `LOWER` when held, LGUI + `LOWER` when double held.
 };
 
 // define a type containing as many tapdance states as you need
@@ -79,36 +85,6 @@ static td_state_t td_state;
 
 // function to determine the current tapdance state
 int cur_dance_layer (qk_tap_dance_state_t *state);
-int cur_dance_shift (qk_tap_dance_state_t *state);
-
-// `finished` and `reset` functions for each tapdance keycode
-void shiftlb_finished (qk_tap_dance_state_t *state, void *user_data);
-void shiftlb_reset (qk_tap_dance_state_t *state, void *user_data);
-
-// `finished` and `reset` functions for each tapdance keycode
-void shiftrb_finished (qk_tap_dance_state_t *state, void *user_data);
-void shiftrb_reset (qk_tap_dance_state_t *state, void *user_data);
-
-// `finished` and `reset` functions for each tapdance keycode
-void shiftlc_finished (qk_tap_dance_state_t *state, void *user_data);
-void shiftlc_reset (qk_tap_dance_state_t *state, void *user_data);
-
-// `finished` and `reset` functions for each tapdance keycode
-void shiftrc_finished (qk_tap_dance_state_t *state, void *user_data);
-void shiftrc_reset (qk_tap_dance_state_t *state, void *user_data);
-
-// `finished` and `reset` functions for each tapdance keycode
-void shiftla_finished (qk_tap_dance_state_t *state, void *user_data);
-void shiftla_reset (qk_tap_dance_state_t *state, void *user_data);
-
-// `finished` and `reset` functions for each tapdance keycode
-void shiftra_finished (qk_tap_dance_state_t *state, void *user_data);
-void shiftra_reset (qk_tap_dance_state_t *state, void *user_data);
-
-// `finished` and `reset` functions for each tapdance keycode
-void lowertd_finished (qk_tap_dance_state_t *state, void *user_data);
-void lowertd_reset (qk_tap_dance_state_t *state, void *user_data);
-
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -118,7 +94,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
      KC_WITB,  KC_A,  KC_S,  KC_D,  KC_F,  KC_G,                   KC_H,  KC_J,  KC_K,  KC_L,KC_SCLN,KC_CTEL,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-    KC_LSPD,  KC_Z,  KC_X,  KC_C,  KC_V,  KC_B,                   KC_N,  KC_M,KC_COMM,KC_DOT,KC_SLSH,KC_RSPF,\
+    SFT_LP,  KC_Z,  KC_X,  KC_C,  KC_V,  KC_B,                   KC_N,  KC_M,KC_COMM,KC_DOT,KC_SLSH,SFT_RP,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
                                 KC_LALT,TD(LOWER_TD),KC_WINT,   KC_SPC, RAISE,KC_RALT \
                               //`--------------------'  `--------------------'
@@ -143,7 +119,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
     _______,RSFT(KC_1),RSFT(KC_2),RSFT(KC_3),RSFT(KC_4),RSFT(KC_5),RSFT(KC_6),RSFT(KC_7),RSFT(KC_8),RSFT(KC_9),RSFT(KC_0) ,_______,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
- TD(SHIFT_LC),RALT(KC_1),RALT(KC_2),RALT(KC_3),RALT(KC_4),RALT(KC_5),RALT(KC_6),RALT(KC_7),RALT(KC_8),RALT(KC_9),RALT(KC_0),TD(SHIFT_RC),\
+ SFT_LCB,RALT(KC_1),RALT(KC_2),RALT(KC_3),RALT(KC_4),RALT(KC_5),RALT(KC_6),RALT(KC_7),RALT(KC_8),RALT(KC_9),RALT(KC_0),SFT_RCB,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
                                _______,_______,_______, _______,_______,_______ \
                               //`--------------------'  `--------------------'
@@ -151,15 +127,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_RAISE] = LAYOUT( \
   //,-----------------------------------------.                ,-----------------------------------------.
-  _______,KC_1,  KC_2,  KC_3,  KC_4,  KC_5,                    _______,KC_HOME, KC_UP,KC_END,KC_PGUP,_______,\
+  _______,KC_1,  KC_2,  KC_3,  KC_4,  KC_5,                    KC_PGUP,KC_HOME, KC_UP,KC_END,KC_MINS,KC_EQL,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-  _______,_______, _______, _______, _______,_______,          KC_INS,KC_LEFT,KC_DOWN,KC_RIGHT,KC_PGDN,_______,\
+  _______,RSFT(KC_1),RSFT(KC_2),RSFT(KC_3),RSFT(KC_4),RSFT(KC_5),KC_PGDN,KC_LEFT,KC_DOWN,KC_RIGHT,KC_LBRC,KC_RBRC,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
- TD(SHIFT_LB),KC_F1, KC_F2, KC_F3, KC_F4, KC_F5,                KC_F6,KC_F7,KC_F8,KC_F9,KC_F10,TD(SHIFT_RB),\
+ SFT_LB,RALT(KC_1),RALT(KC_2),RALT(KC_3),RALT(KC_4),RALT(KC_5),RALT(KC_6),RALT(KC_7),RALT(KC_8),KC_QUOT,KC_NUHS,SFT_RB,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
                                 KC_F11,_______,_______,   _______, RAISE,KC_RF12 \
                               //`--------------------'  `--------------------'
   ),
+
 
   [_ADJUST] = LAYOUT( \
   //,-----------------------------------------.                ,-----------------------------------------.
@@ -167,7 +144,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
 RGB_TOG,KC_PSCR,G(S(KC_S)),KC_BRID,KC_BRIU,_______,            WITCHER,_______,_______,KC_LBRC,KC_RBRC,_______,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
- TD(SHIFT_LA),RGB_MOD,RGB_HUI,RGB_SAD,RGB_SAI,RGBRST,            RGB_VAD,RGB_VAI,RGB_SPD,KC_QUOT,KC_NUHS,TD(SHIFT_RA),\
+ SFT_INF,RGB_MOD,RGB_HUI,RGB_SAD,RGB_SAI,RGBRST,            RGB_VAD,RGB_VAI,RGB_SPD,KC_QUOT,KC_NUHS,SFT_SUP,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
                                 KC_LALT,_______,_______,_______,_______,KC_RALT \
                               //`--------------------'  `--------------------'
@@ -231,190 +208,7 @@ int cur_dance_layer (qk_tap_dance_state_t *state) {
   else { return 3; } // any number higher than the maximum state value you return above
 }
 
-// determine the tapdance state to return for shift keys
-int cur_dance_shift (qk_tap_dance_state_t *state) {
-  if (state->count >= 1) {
-    if (state->interrupted || !state->pressed) { return SINGLE_TAP; }
-    else { return SINGLE_HOLD; }
-  }
-  else { return 3; } // any number higher than the maximum state value you return above
-}
-
 // handle the possible states for each tapdance keycode you define:
-
-void shiftlb_finished (qk_tap_dance_state_t *state, void *user_data) {
-  td_state = cur_dance_shift(state);
-  switch (td_state) {
-    case SINGLE_TAP:
-      register_mods(MOD_BIT(KC_RALT)); 
-      register_code16(KC_5);
-      break;
-    case SINGLE_HOLD:
-      register_mods(MOD_BIT(KC_LSFT)); // for a layer-tap key, use `layer_on(_MY_LAYER)` here
-      break;
-    default:
-      break;
-  }
-}
-
-void shiftrb_finished (qk_tap_dance_state_t *state, void *user_data) {
-  td_state = cur_dance_shift(state);
-  switch (td_state) {
-    case SINGLE_TAP:
-      register_mods(MOD_BIT(KC_RALT)); 
-      register_code16(KC_MINS);
-      break;
-    case SINGLE_HOLD:
-      register_mods(MOD_BIT(KC_RSFT)); // for a layer-tap key, use `layer_on(_MY_LAYER)` here
-      break;
-    default:
-      break;
-  }
-}
-
-void shiftlb_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (td_state) {
-    case SINGLE_TAP:
-      unregister_code16(KC_5);
-      unregister_mods(MOD_BIT(KC_RALT)); 
-      break;
-    case SINGLE_HOLD:
-      unregister_mods(MOD_BIT(KC_LSFT)); // for a layer-tap key, use `layer_off(_MY_LAYER)` here
-      break;
-    default:
-      break;
-  }
-}
-
-void shiftrb_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (td_state) {
-    case SINGLE_TAP:
-      unregister_code16(KC_MINS);
-      unregister_mods(MOD_BIT(KC_RALT)); 
-      break;
-    case SINGLE_HOLD:
-      unregister_mods(MOD_BIT(KC_RSFT)); // for a layer-tap key, use `layer_off(_MY_LAYER)` here
-      break;
-    default:
-      break;
-  }
-}
-
-void shiftlc_finished (qk_tap_dance_state_t *state, void *user_data) {
-  td_state = cur_dance_shift(state);
-  switch (td_state) {
-    case SINGLE_TAP:
-      register_mods(MOD_BIT(KC_RALT)); 
-      register_code16(KC_4);
-      break;
-    case SINGLE_HOLD:
-      register_mods(MOD_BIT(KC_LSFT)); // for a layer-tap key, use `layer_on(_MY_LAYER)` here
-      break;
-    default:
-      break;
-  }
-}
-
-void shiftrc_finished (qk_tap_dance_state_t *state, void *user_data) {
-  td_state = cur_dance_shift(state);
-  switch (td_state) {
-    case SINGLE_TAP:
-      register_mods(MOD_BIT(KC_RALT)); 
-      register_code16(KC_EQL);
-      break;
-    case SINGLE_HOLD:
-      register_mods(MOD_BIT(KC_RSFT)); // for a layer-tap key, use `layer_on(_MY_LAYER)` here
-      break;
-    default:
-      break;
-  }
-}
-
-void shiftlc_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (td_state) {
-    case SINGLE_TAP:
-      unregister_code16(KC_4);
-      unregister_mods(MOD_BIT(KC_RALT));
-      break;
-    case SINGLE_HOLD:
-      unregister_mods(MOD_BIT(KC_LSFT)); // for a layer-tap key, use `layer_off(_MY_LAYER)` here
-      break;
-    default:
-      break;
-  }
-}
-
-void shiftrc_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (td_state) {
-    case SINGLE_TAP:
-      unregister_code16(KC_EQL);
-      unregister_mods(MOD_BIT(KC_RALT));
-      break;
-    case SINGLE_HOLD:
-      unregister_mods(MOD_BIT(KC_RSFT)); // for a layer-tap key, use `layer_off(_MY_LAYER)` here
-      break;
-    default:
-      break;
-  }
-}
-
-void shiftla_finished (qk_tap_dance_state_t *state, void *user_data) {
-  td_state = cur_dance_shift(state);
-  switch (td_state) {
-    case SINGLE_TAP:
-      register_code16(KC_NUBS);
-      break;
-    case SINGLE_HOLD:
-      register_mods(MOD_BIT(KC_LSFT)); // for a layer-tap key, use `layer_on(_MY_LAYER)` here
-      break;
-    default:
-      break;
-  }
-}
-
-void shiftra_finished (qk_tap_dance_state_t *state, void *user_data) {
-  td_state = cur_dance_shift(state);
-  switch (td_state) {
-    case SINGLE_TAP:
-      register_mods(MOD_BIT(KC_RSFT));
-      register_code16(KC_NUBS);
-      break;
-    case SINGLE_HOLD:
-      register_mods(MOD_BIT(KC_RSFT)); // for a layer-tap key, use `layer_on(_MY_LAYER)` here
-      break;
-    default:
-      break;
-  }
-}
-
-void shiftla_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (td_state) {
-    case SINGLE_TAP:
-      unregister_code16(KC_NUBS);
-      break;
-    case SINGLE_HOLD:
-      unregister_mods(MOD_BIT(KC_LSFT)); // for a layer-tap key, use `layer_off(_MY_LAYER)` here
-      break;
-    default:
-      break;
-  }
-}
-
-void shiftra_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (td_state) {
-    case SINGLE_TAP:
-      unregister_code16(KC_NUBS);
-      unregister_mods(MOD_BIT(KC_RSFT));
-      break;
-    case SINGLE_HOLD:
-      unregister_mods(MOD_BIT(KC_RSFT)); // for a layer-tap key, use `layer_off(_MY_LAYER)` here
-      break;
-    default:
-      break;
-  }
-}
-
-
 
 int RGB_current_mode;
 
@@ -516,13 +310,8 @@ void lowertd_reset (qk_tap_dance_state_t *state, void *user_data) {
 
 // define `ACTION_TAP_DANCE_FN_ADVANCED()` for each tapdance keycode, passing in `finished` and `reset` functions
 qk_tap_dance_action_t tap_dance_actions[] = {
-  [SHIFT_LB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, shiftlb_finished, shiftlb_reset)
- ,[SHIFT_RB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, shiftrb_finished, shiftrb_reset)
- ,[SHIFT_LC] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, shiftlc_finished, shiftlc_reset)
- ,[SHIFT_RC] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, shiftrc_finished, shiftrc_reset)
- ,[SHIFT_LA] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, shiftla_finished, shiftla_reset)
- ,[SHIFT_RA] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, shiftra_finished, shiftra_reset)
- ,[LOWER_TD] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, lowertd_finished, lowertd_reset)
+  [LOWER_TD] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, lowertd_finished, lowertd_reset)
+// ,[RAISE_TD] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, raisetd_finished, raisetd_reset)
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -539,6 +328,62 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         persistent_default_layer_set(1UL<<_AZERTY);
       }
       return false;
+    case SFT_LB:
+      if (record->tap.count > 0) {
+        if (record->event.pressed) {
+	  register_mods(MOD_BIT(KC_RALT));
+	  register_code16(KC_5);
+        } else {
+	  unregister_code16(KC_5);
+	  unregister_mods(MOD_BIT(KC_RALT));
+        }
+        return false;
+      }
+    case SFT_RB:
+      if (record->tap.count > 0) {
+        if (record->event.pressed) {
+	  register_mods(MOD_BIT(KC_RALT));
+	  register_code16(KC_MINS);
+        } else {
+	  unregister_code16(KC_MINS);
+	  unregister_mods(MOD_BIT(KC_RALT));
+        }
+        return false;
+      }
+    case SFT_LCB:
+      if (record->tap.count > 0) {
+        if (record->event.pressed) {
+	  register_mods(MOD_BIT(KC_RALT));
+	  register_code16(KC_4);
+        } else {
+	  unregister_code16(KC_4);
+	  unregister_mods(MOD_BIT(KC_RALT));
+        }
+        return false;
+      }
+    case SFT_RCB:
+      if (record->tap.count > 0) {
+        if (record->event.pressed) {
+	  register_mods(MOD_BIT(KC_RALT));
+	  register_code16(KC_EQL);
+        } else {
+	  unregister_code16(KC_EQL);
+	  unregister_mods(MOD_BIT(KC_RALT));
+        }
+        return false;
+      }
+    case SFT_SUP:
+      if (record->tap.count > 0) {
+        if (record->event.pressed) {
+	  register_mods(MOD_BIT(KC_RSFT));
+	  register_code16(KC_NUBS);
+        } else {
+	  unregister_code16(KC_NUBS);
+	  unregister_mods(MOD_BIT(KC_RSFT));
+        }
+        return false;
+      }
+
     case LOWER:
       if (record->event.pressed) {
         layer_on(_LOWER);
